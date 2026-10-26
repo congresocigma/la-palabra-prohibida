@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#15111c" />
+  <meta name="description" content="La Palabra Prohibida: explica la palabra, evita las prohibidas y consigue segundos para el Rosco Maldito." />
+  <title>La Palabra Prohibida · Jack Mortis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{color-scheme:dark;--bg:#15111c;--panel:#201a29;--panel2:#291e31;--line:rgba(228,198,146,.23);--gold:#e6c59a;--cream:#f9eee0;--sub:#bbadbd;--wine:#6b3449;--green:#76c7a4;--red:#e09d9b;--radius:19px}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;min-height:100%;background:var(--bg)}
+    body{margin:0;background:var(--bg);color:var(--cream);font-family:'DM Sans',system-ui,sans-serif;min-height:100vh}
+    button{font:inherit;cursor:pointer;transition:filter .16s ease,transform .16s ease,border-color .16s ease}
+    button:hover:not(:disabled){filter:brightness(1.12)}button:active:not(:disabled){transform:scale(.98)}button:disabled{opacity:.45;cursor:not-allowed}
+    .ambient{position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(ellipse at 85% 20%,rgba(123,55,55,.16),transparent 35%),radial-gradient(ellipse at 12% 80%,rgba(83,59,121,.18),transparent 40%),linear-gradient(180deg,#1b1423,#130f19)}
+    .ambient:after{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,transparent,transparent 118px,rgba(255,255,255,.009) 119px);opacity:.55}
+    .app-shell{width:min(1120px,calc(100% - 36px));margin:auto;min-height:100vh;display:flex;flex-direction:column}
+    .masthead{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:31px 0 25px;border-bottom:1px solid var(--line)}
+    .eyebrow,.tiny-label{font-size:10px;letter-spacing:.23em;font-weight:700;color:var(--gold);text-transform:uppercase}
+    .brand-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(28px,4vw,44px);line-height:.97;font-weight:700;margin-top:9px}
+    .brand-title em{font-weight:500;color:var(--gold)}
+    .header-pill{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:100px;padding:9px 13px;font-size:12px;color:var(--gold);white-space:nowrap}
+    #app{flex:1;padding:25px 0 35px}
+    .subtitle{text-align:center;color:#ddcfda;line-height:1.7;max-width:560px;margin:0 auto 12px;font-size:15px}
+    .ornament{text-align:center;color:var(--gold);letter-spacing:.35em;margin:0 0 24px;font-size:16px;opacity:.9}
+    .stack{display:grid;gap:18px}
+    .panel{background:linear-gradient(145deg,rgba(40,30,48,.96),rgba(26,22,33,.97));border:1px solid var(--line);border-radius:var(--radius);padding:clamp(22px,4vw,40px);box-shadow:0 20px 70px rgba(0,0,0,.18)}
+    .center{text-align:center}.muted{color:var(--sub)}.small{font-size:13px}.micro{font-size:11px;color:var(--sub)}
+    .scoreboard{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+    .score-card{padding:15px 12px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.026);text-align:center;min-width:0}
+    .score-label{font-size:11px;letter-spacing:.12em;color:var(--sub);text-transform:uppercase;font-weight:700}
+    .score-num{font-size:clamp(24px,4vw,36px);font-weight:700;margin:7px 0 0;font-family:'Cormorant Garamond',Georgia,serif;color:var(--cream);font-variant-numeric:tabular-nums}
+    .score-card.timer .score-num{color:var(--gold)}.score-card.timer.urgent .score-num{color:#ffc1bf;animation:pulse .8s infinite alternate}
+    @keyframes pulse{to{opacity:.55}}
+    .word-card{position:relative;min-height:350px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;padding:clamp(23px,5vw,44px)}
+    .word-card:before,.word-card:after{content:'✦';position:absolute;color:var(--gold);font-size:18px;opacity:.75}.word-card:before{top:17px;left:20px}.word-card:after{bottom:15px;right:20px}
+    .card-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:25px}
+    .word{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(43px,8vw,76px);line-height:1.02;font-weight:700;text-transform:uppercase;color:var(--cream);overflow-wrap:anywhere;margin:0 0 28px;text-shadow:0 0 24px rgba(230,197,154,.1)}
+    .forbidden-title{font-size:11px;line-height:1.4;letter-spacing:.18em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:13px}
+    .forbidden{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+    .forbidden span{display:inline-flex;align-items:center;justify-content:center;background:rgba(107,52,73,.25);border:1px solid rgba(224,157,155,.35);border-radius:9px;padding:10px 13px;color:#f9e5df;font-size:clamp(13px,2.8vw,16px);font-weight:700;min-height:38px}
+    .buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .btn{border-radius:11px;border:1px solid var(--line);padding:13px 19px;background:#34273e;color:var(--cream);font-size:14px;font-weight:700;min-height:48px}
+    .btn.primary{border-color:#e9c69d;background:linear-gradient(115deg,#e7c69c,#ca9e70);color:#241623}
+    .btn.secondary{background:rgba(233,199,153,.08);color:var(--gold)}
+    .btn.danger{background:rgba(137,50,67,.22);color:#ffc1bf;border-color:rgba(234,131,135,.5)}
+    .btn.plain{background:transparent;border-color:transparent;color:var(--sub)}
+    .btn:focus-visible{outline:3px solid #edc896;outline-offset:3px}
+    .controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+    .startbox,.endbox{max-width:900px;margin:0 auto;text-align:center}
+    .section-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(35px,6vw,57px);line-height:1.02;font-weight:600;margin:13px 0;color:var(--gold)}
+    .panel-intro{line-height:1.7;color:#ddcfda;max-width:650px;margin:0 auto 18px}
+    .notice{border-radius:11px;padding:13px 16px;font-size:13px;line-height:1.6;background:rgba(183,127,78,.11);border:1px solid rgba(213,169,113,.3);color:#f5d8b6;max-width:650px;margin:0 auto}
+    .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.actions.center{justify-content:center}
+    .result-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:24px 0}
+    .result{background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:13px;padding:17px 9px}
+    .result strong{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(27px,4vw,38px);line-height:1.2;color:var(--gold)}
+    .result span{display:block;color:var(--sub);font-size:10px;line-height:1.45;letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin-top:6px}
+    .hidden{display:none!important}
+    .site-footer{text-align:center;padding:18px 0 28px;color:#97889c;font-size:11px;letter-spacing:.07em;line-height:1.7}
+    .site-footer span{color:var(--gold);padding:0 10px}
+    @media(max-width:760px){.app-shell{width:min(100% - 28px,700px)}.masthead{align-items:flex-start;padding:20px 0}.brand-title{font-size:32px}.eyebrow{font-size:8px;letter-spacing:.18em}.header-pill{font-size:10px;padding:8px 10px}.subtitle{font-size:13px}.panel{padding:25px 19px}.word-card{min-height:320px}.card-meta{margin-bottom:22px}.result-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.site-footer{font-size:9px}}
+    @media(max-width:430px){.masthead{gap:8px}.brand-title{font-size:29px}.header-pill{margin-top:4px}.scoreboard{gap:6px}.score-card{padding:12px 5px}.score-label{font-size:9px;letter-spacing:.07em}.score-num{font-size:25px}.buttons{gap:8px}.btn{padding:12px 8px;font-size:12px}.controls .btn{font-size:12px}.word{font-size:clamp(37px,10vw,52px)}.forbidden{gap:6px}.forbidden span{padding:8px 10px}.site-footer span{padding:0 4px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}}
+  </style>
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
+  <div class="app-shell">
+    <header class="masthead">
+      <div class="brand-lockup">
+        <span class="eyebrow">UNA NOCHE PARA MORIRSE · JACK MORTIS PRESENTA</span>
+        <div class="brand-title">La Palabra <em>Prohibida</em></div>
+      </div>
+      <div class="header-actions"><span class="header-pill">✦ 70 tarjetas</span></div>
+    </header>
+    <main id="app" aria-live="polite">
+      <p class="subtitle">Explica la palabra. Evita las prohibidas. Que no se te escape ni una.</p>
+      <div class="ornament" aria-hidden="true">✦ · ☠ · ✦</div>
+
+      <section id="game" class="hidden stack" aria-live="polite">
+        <div class="scoreboard">
+          <div class="score-card timer" id="timerBox"><div class="score-label">Tiempo</div><div class="score-num" id="timer">01:00</div></div>
+          <div class="score-card"><div class="score-label">Adivinadas</div><div class="score-num" id="correct">0</div></div>
+          <div class="score-card"><div class="score-label">Para el rosco</div><div class="score-num" id="bonus">+0 s</div></div>
+        </div>
+        <div class="panel word-card" id="card">
+          <div class="card-meta"><span class="tiny-label" id="cardCount">Tarjeta 1 de 70</span><span class="micro">Una palabra · Cinco trampas</span></div>
+          <div class="word" id="word">BRUJA</div>
+          <div class="forbidden-title">✦ Palabras prohibidas ✦</div>
+          <div class="forbidden" id="forbidden"></div>
+        </div>
+        <div class="buttons">
+          <button class="btn primary" id="correctBtn" type="button">✓ Adivinada · +3 s</button>
+          <button class="btn secondary" id="passBtn" type="button">⟶ Pasar</button>
+        </div>
+        <div class="controls">
+          <button class="btn plain" id="pauseBtn" type="button">Ⅱ Pausar</button>
+          <button class="btn danger" id="finishBtn" type="button">Terminar turno</button>
+        </div>
+      </section>
+
+      <section id="start" class="panel startbox">
+        <div class="tiny-label">LA PRIMERA PRUEBA</div>
+        <h2 class="section-title">¿Están preparados?</h2>
+        <p class="panel-intro">Un minuto para adivinar tantas palabras como puedan. Una persona explica; el resto adivina. No se pueden decir las palabras prohibidas ni sus derivados, y tampoco hacer mímica.</p>
+        <div class="notice"><strong>Cada acierto suma 3 segundos para el Rosco Maldito.</strong> Las tarjetas se mezclan al azar y no se repiten durante la ronda.</div>
+        <div class="actions center"><button class="btn primary" id="startBtn" type="button">☠ Comenzar turno</button></div>
+      </section>
+
+      <section id="paused" class="panel startbox hidden">
+        <div class="tiny-label">EL RELOJ SE HA DETENIDO</div>
+        <h2 class="section-title">Tiempo detenido</h2>
+        <p class="panel-intro">Jack Mortis te concede una pausa... por ahora.</p>
+        <div class="actions center"><button class="btn primary" id="resumeBtn" type="button">▶ Reanudar</button></div>
+      </section>
+
+      <section id="end" class="panel endbox hidden" aria-live="polite">
+        <div class="tiny-label">EL TURNO HA TERMINADO</div>
+        <h2 class="section-title" id="endTitle">¡Se acabó el tiempo!</h2>
+        <p class="panel-intro" id="endMessage">Jack Mortis ha visto suficiente.</p>
+        <div class="result-grid">
+          <div class="result"><strong id="finalCorrect">0</strong><span>Palabras adivinadas</span></div>
+          <div class="result"><strong id="finalBonus">+0 s</strong><span>Para el Rosco Maldito</span></div>
+          <div class="result"><strong id="finalPass">0</strong><span>Tarjetas pasadas</span></div>
+          <div class="result"><strong id="finalSeen">0</strong><span>Tarjetas vistas</span></div>
+        </div>
+        <button class="btn primary" id="newBtn" type="button">↻ Nueva ronda aleatoria</button>
+      </section>
+    </main>
+    <footer class="site-footer"><span>✦</span> Setenta tarjetas · Cada acierto suma tres segundos al Rosco Maldito <span>✦</span></footer>
+  </div>
+<script>const cards = [
+['BRUJA',['Escoba','Hechizo','Caldero','Sombrero','Magia']],
+['VAMPIRO',['Sangre','Colmillos','Drácula','Murciélago','Ataúd']],
+['CALABAZA',['Naranja','Halloween','Semillas','Tallar','Farol']],
+['FANTASMA',['Espíritu','Sábana','Muerto','Transparente','Aparecer']],
+['ZOMBI',['Cerebro','Podrido','Apocalipsis','Muerto','Caminar']],
+['HOMBRE LOBO',['Luna llena','Aullido','Pelaje','Transformación','Mordida']],
+['MOMIA',['Vendas','Egipto','Faraón','Sarcófago','Desierto']],
+['DEMONIO',['Diablo','Infierno','Cuernos','Posesión','Rojo']],
+['MURCIÉLAGO',['Alas','Cueva','Volar','Noche','Vampiro']],
+['ARAÑA',['Ocho patas','Telaraña','Arácnido','Veneno','Insecto']],
+['TELARAÑA',['Araña','Hilos','Tejer','Pegajosa','Rincón']],
+['CEMENTERIO',['Tumbas','Lápidas','Muertos','Entierro','Cruces']],
+['ATAÚD',['Caja','Madera','Cadáver','Entierro','Cementerio']],
+['ESQUELETO',['Huesos','Cráneo','Costillas','Cuerpo','Anatomía']],
+['CALAVERA',['Cráneo','Huesos','Muerte','Pirata','Esqueleto']],
+['SANGRE',['Roja','Venas','Heridas','Líquido','Vampiro']],
+['COLMILLOS',['Dientes','Vampiro','Morder','Afilados','Sangre']],
+['ESCOBA',['Barrer','Palo','Cerdas','Bruja','Limpiar']],
+['HECHIZO',['Magia','Conjuro','Varita','Encantamiento','Bruja']],
+['POCIÓN',['Líquido','Frasco','Beber','Ingredientes','Caldero']],
+['CALDERO',['Olla','Bruja','Poción','Hervir','Metal']],
+['GATO NEGRO',['Felino','Maullar','Superstición','Siete vidas','Mascota']],
+['LUNA LLENA',['Noche','Cielo','Redonda','Hombre lobo','Iluminar']],
+['CASA EMBRUJADA',['Mansión','Fantasma','Ruidos','Maldición','Miedo']],
+['OSCURIDAD',['Luz','Negro','Noche','Tinieblas','Sombra']],
+['SOMBRA',['Silueta','Luz','Oscura','Reflejo','Figura']],
+['PESADILLA',['Dormir','Sueño','Miedo','Despertar','Noche']],
+['SUSTO',['Miedo','Grito','Sorpresa','Asustar','Sobresalto']],
+['GRITO',['Voz','Sonido','Miedo','Gritar','Chillido']],
+['MALDICIÓN',['Hechizo','Desgracia','Maleficio','Mala suerte','Condena']],
+['EXORCISMO',['Sacerdote','Posesión','Ritual','Agua bendita','Demonio']],
+['MÁSCARA',['Cara','Cubrir','Disfraz','Ojos','Plástico']],
+['DISFRAZ',['Ropa','Personaje','Máscara','Fiesta','Vestirse']],
+['TRUCO O TRATO',['Caramelos','Puerta','Niños','Halloween','Pedir']],
+['CARAMELOS',['Dulces','Azúcar','Golosinas','Chupetín','Comer']],
+['VELA',['Cera','Mecha','Llama','Iluminar','Derretir']],
+['LINTERNA',['Luz','Pilas','Iluminar','Mano','Oscuridad']],
+['HOGUERA',['Fuego','Leña','Quemar','Fogata','Calor']],
+['MANZANA ACARAMELADA',['Fruta','Roja','Azúcar','Palito','Dulce']],
+['CUERVO',['Pájaro','Negro','Pico','Graznar','Alas']],
+['CEMENTERIO ABANDONADO',['Tumbas','Ruinas','Lápidas','Fantasmas','Viejo']],
+['CRIPTA',['Bóveda','Subterráneo','Tumbas','Ataúd','Iglesia']],
+['ESPÍRITU',['Fantasma','Alma','Muerto','Sobrenatural','Aparición']],
+['POSESIÓN',['Demonio','Controlar','Cuerpo','Exorcismo','Espíritu']],
+['PÉNDULO',['Reloj','Oscilar','Cadena','Hipnosis','Movimiento']],
+['OUIJA',['Tablero','Espíritu','Letras','Invocar','Sesión']],
+['BOLA DE CRISTAL',['Adivinar','Futuro','Esfera','Bruja','Vidente']],
+['VARITA MÁGICA',['Hechizo','Mago','Magia','Madera','Harry Potter']],
+['FRANKENSTEIN',['Monstruo','Científico','Electricidad','Laboratorio','Tornillos']],
+['DRÁCULA',['Conde','Transilvania','Vampiro','Colmillos','Sangre']],
+['CHUCKY',['Muñeco','Pelirrojo','Cuchillo','Juguete','Asesino']],
+['FREDDY KRUEGER',['Pesadillas','Guante','Cuchillas','Sombrero','Elm Street']],
+['JASON VOORHEES',['Hockey','Máscara','Machete','Campamento','Viernes 13']],
+['MICHAEL MYERS',['Máscara','Cuchillo','Halloween','Asesino','Laurie']],
+['BEETLEJUICE',['Fantasma','Rayas','Tim Burton','Nombre','Tres veces']],
+['PENNYWISE',['Payaso','Globo','Alcantarilla','IT','Stephen King']],
+['ANNABELLE',['Muñeca','Porcelana','Demonio','Warren','Vitrina']],
+['NOSFERATU',['Orlok','Murnau','Cine mudo','Vampiro','Sombra']],
+['JINETE SIN CABEZA',['Caballo','Sleepy Hollow','Leyenda','Hacha','Fantasma']],
+['MONSTRUO',['Criatura','Terror','Horrible','Miedo','Película']],
+['CADÁVER',['Muerto','Cuerpo','Morgue','Descomposición','Funeral']],
+['SANGRE FALSA',['Maquillaje','Ketchup','Rojo','Efectos','Heridas']],
+['MOTOSIERRA',['Motor','Sierra','Cortar','Ruido','Leatherface']],
+['LABORATORIO',['Científico','Experimentos','Tubos','Frankenstein','Electricidad']],
+['TRANSFORMACIÓN',['Cambiar','Convertirse','Metamorfosis','Hombre lobo','Luna llena']],
+['AULLIDO',['Lobo','Sonido','Grito','Luna','Perro']],
+['TELÉFONO MALDITO',['Llamada','Celular','Timbre','Voz','Terror']],
+['PAYASO DIABÓLICO',['Pennywise','Circo','Maquillaje','Sonrisa','Globo']],
+['MALDICIÓN ANCESTRAL',['Maleficio','Hechizo','Mala suerte','Antepasados','Bruja']],
+['PORTAL AL MÁS ALLÁ',['Dimensión','Puerta','Muertos','Otra vida','Universo']]
+];
+const $ = id => document.getElementById(id);
+let deck=[], index=0, correct=0, passed=0, remaining=60, timerId=null, started=false, paused=false, finished=false;
+function shuffle(source){const a=[...source];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function formatTime(s){const n=Math.max(0,s);return `${String(Math.floor(n/60)).padStart(2,'0')}:${String(n%60).padStart(2,'0')}`;}
+function updateStats(){ $('timer').textContent=formatTime(remaining);$('correct').textContent=correct;$('bonus').textContent=`+${correct*3} s`;$('timerBox').classList.toggle('urgent',remaining<=10); }
+function renderCard(){
+  if(index>=deck.length){finishTurn('¡Se acabó el mazo!','Han recorrido las 70 tarjetas. Jack Mortis está impresionado.');return;}
+  const c=deck[index];$('cardCount').textContent=`Tarjeta ${index+1} de ${deck.length}`;$('word').textContent=c[0];
+  const holder=$('forbidden');holder.replaceChildren();c[1].forEach(w=>{const chip=document.createElement('span');chip.textContent=w;holder.appendChild(chip);});
+}
+function startRound(){deck=shuffle(cards);index=0;correct=0;passed=0;remaining=60;started=true;paused=false;finished=false;$('start').classList.add('hidden');$('end').classList.add('hidden');$('paused').classList.add('hidden');$('game').classList.remove('hidden');$('pauseBtn').textContent='Ⅱ Pausar';$('correctBtn').disabled=false;$('passBtn').disabled=false;updateStats();renderCard();runTimer();}
+function runTimer(){clearInterval(timerId);timerId=setInterval(()=>{if(paused||finished)return;remaining--;updateStats();if(remaining<=0)finishTurn('¡Se acabó el tiempo!','El reloj ha dictado sentencia. Veamos cuántos segundos consiguieron para el Rosco Maldito.');},1000);}
+function advance(isCorrect){if(!started||paused||finished)return;if(isCorrect)correct++;else passed++;index++;updateStats();renderCard();}
+function finishTurn(title,message){clearInterval(timerId);finished=true;paused=false;$('game').classList.add('hidden');$('paused').classList.add('hidden');$('end').classList.remove('hidden');$('endTitle').textContent=title;$('endMessage').textContent=message;$('finalCorrect').textContent=correct;$('finalBonus').textContent=`+${correct*3} s`;$('finalPass').textContent=passed;$('finalSeen').textContent=Math.min(index+1,deck.length);}
+$('startBtn').addEventListener('click',startRound);
+$('correctBtn').addEventListener('click',()=>advance(true));
+$('passBtn').addEventListener('click',()=>advance(false));
+$('pauseBtn').addEventListener('click',()=>{if(finished)return;paused=true;$('game').classList.add('hidden');$('paused').classList.remove('hidden');clearInterval(timerId);});
+$('resumeBtn').addEventListener('click',()=>{paused=false;$('paused').classList.add('hidden');$('game').classList.remove('hidden');runTimer();});
+$('finishBtn').addEventListener('click',()=>finishTurn('Turno finalizado','Jack Mortis acepta su decisión. Revisen los segundos conseguidos para el Rosco Maldito.'));
+$('newBtn').addEventListener('click',()=>{$('end').classList.add('hidden');$('start').classList.remove('hidden');$('game').classList.add('hidden');});</script>
+</body>
+</html>
